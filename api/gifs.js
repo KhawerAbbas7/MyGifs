@@ -6,7 +6,7 @@ export default async (req, res) => {
         const gifsDirectory = path.join(process.cwd(), 'gifs');
         const files = await fs.readdir(gifsDirectory);
         const gifFiles = files.filter(file => file.endsWith('.gif'));
-        res.status(200).json(gifFiles.map(name => ({ name })));
+        res.status(200).json(gifFiles.map(fileName => ({ name: fileName })));
     } catch (error) {
         console.error("Error reading GIFs directory:", error);
         res.status(500).json({ error: 'Failed to read GIF directory' });
