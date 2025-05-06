@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 export default function GifCard({ gif }) {
+  console.log(gif)
   return (
     <div className="card">
       <Link href={`/${encodeURIComponent(gif.name)}`}>
