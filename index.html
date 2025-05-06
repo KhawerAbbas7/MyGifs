@@ -135,7 +135,7 @@
       box.innerHTML = `
         <img src="${gifUrl}" alt="${filename}">
         <p style="font-size: 14px; color: var(--text-muted)">${filename}</p>
-        <button onclick="copyLink('${window.location.origin + gifUrl}')">Copy Link</button>
+        <button onclick="copyLink('${window.location.origin + decodeURIComponent(gifUrl)}')">Copy Link</button>
       `;
       container.appendChild(box);
     });
