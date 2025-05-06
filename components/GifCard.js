@@ -10,7 +10,7 @@ export default function GifCard({ gif }) {
           <div className="card-image">
             <img src={`https://khawigifs.vercel.app${gif.path}`}
       alt={gif.name}
-      style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+      style={{ width: '100%', height: 'auto%', objectFit: 'cover' }}
    />
           </div>
           <div className="card-content">
