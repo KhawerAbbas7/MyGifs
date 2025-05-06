@@ -30,8 +30,9 @@ document.addEventListener('DOMContentLoaded', async () => {
             const gifItem = document.createElement('div');
             gifItem.classList.add('gif-item');
 
+            const encodedName = encodeURIComponent(gif.name.replace(/\.gif$/, ''));
             const link = document.createElement('a');
-            link.href = `/${gif.name.replace(/\.gif$/, '')}`;
+            link.href = `/${encodedName}`;
 
             const img = document.createElement('img');
             img.src = `/gifs/${gif.name}`;
