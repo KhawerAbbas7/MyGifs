@@ -129,7 +129,7 @@
     container.innerHTML = "";
     const filtered = gifFilenames.filter(name => name.toLowerCase().includes(filter.toLowerCase()));
     filtered.forEach(filename => {
-      const gifUrl = basePath + encodeURIComponent(gif.filename);
+      const gifUrl = basePath + encodeURIComponent(filename);
       const box = document.createElement("div");
       box.className = "gif-box";
       box.innerHTML = `
