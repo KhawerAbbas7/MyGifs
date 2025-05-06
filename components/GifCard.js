@@ -8,7 +8,7 @@ export default function GifCard({ gif }) {
         <a>
           <div className="card-image">
             <Image 
-              src={`/gifs/${encodeURIComponent(gif.name)}`}
+              src={`/gifs/${encodeURIComponent(gif.name)}.gif`}
               alt={gif.name}
               layout="fill"
               objectFit="cover"
