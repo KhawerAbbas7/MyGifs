@@ -26,7 +26,7 @@ export default function GifDetail({ gifData }) {
   }
   
   const gifName = gifData.name.replace(/\.[^/.]+$/, '');
-  const gifUrl = `${typeof window !== 'undefined' ? window.location.origin : ''}/gifs/${gifData.name}`;
+  const gifUrl = `${typeof window !== 'undefined' ? window.location.origin : ''}${gifData.path}`;
   
   const copyToClipboard = () => {
     navigator.clipboard.writeText(gifUrl);
