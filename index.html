@@ -129,13 +129,13 @@
     container.innerHTML = "";
     const filtered = gifFilenames.filter(name => name.toLowerCase().includes(filter.toLowerCase()));
     filtered.forEach(filename => {
-      const gifUrl = basePath + filename;
+      const gifUrl = basePath + encodeURIComponent(gif.filename);
       const box = document.createElement("div");
       box.className = "gif-box";
       box.innerHTML = `
         <img src="${gifUrl}" alt="${filename}">
         <p style="font-size: 14px; color: var(--text-muted)">${filename}</p>
-        <button onclick="copyLink('${window.location.origin + encodeURIComponent(gifUrl)}')">Copy Link</button>
+        <button onclick="copyLink('${window.location.origin + gifUrl}')">Copy Link</button>
 
       `;
       container.appendChild(box);
