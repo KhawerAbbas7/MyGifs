@@ -8,7 +8,7 @@ export default function GifCard({ gif }) {
       <Link href={`/${encodeURIComponent(gif.name)}`}>
         <a>
           <div className="card-image">
-            <img src={`https://khawigifs.vercel.app/gifs/${gif.path}`}
+            <img src={`https://khawigifs.vercel.app${gif.path}`}
       alt={gif.name}
       style={{ width: '100%', height: '100%', objectFit: 'cover' }}
    />
