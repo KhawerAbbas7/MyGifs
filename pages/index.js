@@ -20,14 +20,6 @@ export default function Home({ gifs }) {
         placeholder="Search GIFs..."
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-        style={{
-          padding: '0.5rem',
-          marginBottom: '1rem',
-          width: '100%',
-          maxWidth: '400px',
-          borderRadius: '8px',
-          border: '1px solid #ccc',
-        }}
       />
 
       <div className="grid">
