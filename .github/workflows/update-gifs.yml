@@ -1,0 +1,25 @@
+name: Update GIFs JSON
+on:
+  push:
+    paths:
+      - 'gifs/**'
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Generate gifs.json
+      run: |
+        cd gifs
+        ls *.gif > ../gifs.json
+        sed -i '1s/^/["/' ../gifs.json
+        sed -i 's/$/"/' ../gifs.json
+        sed -i 's/\n/","/g' ../gifs.json
+        sed -i 's/","$/]/' ../gifs.json
+    - name: Commit gifs.json
+      run: |
+        git config user.name "github-actions"
+        git config user.email "github-actions@github.com"
+        git add gifs.json
+        git commit -m "Update gifs.json" || echo "No changes"
+        git push
