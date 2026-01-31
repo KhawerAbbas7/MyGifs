@@ -20,7 +20,7 @@ jobs:
         shell: python
         run: |
           import os, json
-          files = [f for f in os.listdir('gifs') if f.endswith('.gif')]
+          files = [f for f in os.listdir('public/gifs') if f.endswith('.gif')]
           files.sort()
           with open('gifs.json', 'w') as f:
             json.dump(files, f)
@@ -37,3 +37,4 @@ jobs:
             git pull --rebase origin main
             git push
           fi
+
