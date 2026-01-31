@@ -5,225 +5,208 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GIF Library</title>
 <style>
-:root {
-  --bg-color: #f4f6f8;
-  --card-bg: #ffffff;
-  --text-primary: #1a202c;
-  --text-secondary: #718096;
-  --accent: #3182ce;
-  --border: #e2e8f0;
-  --shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+:root{
+  --bg:#f4f6f8;
+  --card:#fff;
+  --text:#1a202c;
+  --muted:#718096;
+  --accent:#3182ce;
+  --border:#e2e8f0;
+  --shadow:0 6px 12px rgba(0,0,0,.08)
 }
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg-color: #1a202c;
-    --card-bg: #2d3748;
-    --text-primary: #f7fafc;
-    --text-secondary: #a0aec0;
-    --accent: #63b3ed;
-    --border: #4a5568;
-    --shadow: 0 4px 6px -1px rgba(0,0,0,0.3);
+@media(prefers-color-scheme:dark){
+  :root{
+    --bg:#1a202c;
+    --card:#2d3748;
+    --text:#f7fafc;
+    --muted:#a0aec0;
+    --accent:#63b3ed;
+    --border:#4a5568;
+    --shadow:0 6px 12px rgba(0,0,0,.35)
   }
 }
-body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  background-color: var(--bg-color);
-  color: var(--text-primary);
-  margin: 0;
-  line-height: 1.5;
-  transition: background-color 0.3s, color 0.3s;
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+  background:var(--bg);
+  color:var(--text)
 }
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem;
+.container{max-width:1200px;margin:auto;padding:2rem}
+header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border-bottom:1px solid var(--border);
+  margin-bottom:2rem;
+  padding-bottom:1rem
 }
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 2rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid var(--border);
+h1{font-size:1.4rem;margin:0}
+a{text-decoration:none;color:inherit}
+.search{
+  width:100%;
+  padding:.9rem 1rem;
+  border-radius:10px;
+  border:2px solid var(--border);
+  background:var(--card);
+  color:var(--text);
+  font-size:1rem;
+  margin-bottom:2rem
 }
-h1 {
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin: 0;
+.search:focus{outline:none;border-color:var(--accent)}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
+  gap:1.5rem
 }
-a {
-  text-decoration: none;
-  color: inherit;
-  cursor: pointer;
+.card{
+  background:var(--card);
+  border-radius:14px;
+  overflow:hidden;
+  box-shadow:var(--shadow);
+  cursor:pointer;
+  transition:transform .15s,box-shadow .15s
 }
-.search-bar {
-  width: 100%;
-  padding: 1rem;
-  font-size: 1rem;
-  border: 2px solid var(--border);
-  border-radius: 8px;
-  background-color: var(--card-bg);
-  color: var(--text-primary);
-  margin-bottom: 2rem;
-  outline: none;
-  transition: border-color 0.2s;
+.card:hover{transform:translateY(-4px);box-shadow:0 10px 18px rgba(0,0,0,.15)}
+.thumb{
+  aspect-ratio:16/9;
+  background:var(--border)
 }
-.search-bar:focus {
-  border-color: var(--accent);
+.thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.card-title{
+  padding:.8rem 1rem;
+  font-size:.85rem;
+  color:var(--muted);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis
 }
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 1.5rem;
+.hidden{display:none}
+.detail{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:1.5rem
 }
-.card {
-  background-color: var(--card-bg);
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: var(--shadow);
-  transition: transform 0.2s;
-  cursor: pointer;
+.detail img{
+  max-width:100%;
+  max-height:80vh;
+  border-radius:12px;
+  box-shadow:var(--shadow)
 }
-.card:hover {
-  transform: translateY(-4px);
+.btn{
+  background:var(--accent);
+  color:#fff;
+  border:none;
+  border-radius:8px;
+  padding:.6rem 1.4rem;
+  font-size:.95rem;
+  cursor:pointer
 }
-.card-img-wrapper {
-  aspect-ratio: 16/9;
-  overflow: hidden;
-  background-color: var(--border);
+.btn.secondary{
+  background:transparent;
+  color:var(--accent);
+  border:1px solid var(--accent)
 }
-.card img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: opacity 0.3s;
-}
-.card-content {
-  padding: 1rem;
-}
-.card-title {
-  font-size: 0.9rem;
-  font-weight: 600;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  color: var(--text-secondary);
-}
-.detail-view {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2rem;
-}
-.detail-img {
-  max-width: 100%;
-  max-height: 80vh;
-  border-radius: 8px;
-  box-shadow: var(--shadow);
-}
-.btn {
-  display: inline-block;
-  padding: 0.5rem 1.5rem;
-  background-color: var(--accent);
-  color: white;
-  border-radius: 6px;
-  font-weight: 500;
-  transition: opacity 0.2s;
-}
-.btn:hover {
-  opacity: 0.9;
-}
-.hidden {
-  display: none;
-}
+.status{color:var(--muted);font-size:.9rem}
 </style>
 </head>
 <body>
 <div class="container">
   <header>
-    <h1><a href="?">My GIFs</a></h1>
+    <h1><a href="./">My GIFs</a></h1>
   </header>
-  <div id="gallery-view">
-    <input type="text" id="search" class="search-bar" placeholder="Search for GIFs...">
+
+  <section id="gallery">
+    <input id="search" class="search" type="search" placeholder="Search GIFs…" aria-label="Search GIFs">
     <div id="grid" class="grid"></div>
-  </div>
-  <div id="detail-view" class="detail-view hidden">
-    <a href="?" class="btn">&larr; Back to Gallery</a>
-    <h2 id="detail-title"></h2>
-    <img id="detail-image" alt="Detail GIF">
-    <button id="copy-btn" class="btn">Copy Link</button>
-  </div>
+    <div id="empty" class="status hidden">No GIFs found</div>
+  </section>
+
+  <section id="detail" class="detail hidden">
+    <button id="back" class="btn secondary">← Back</button>
+    <h2 id="title"></h2>
+    <img id="image" alt="">
+    <button id="copy" class="btn">Copy Link</button>
+  </section>
 </div>
+
 <script>
-const RAW_BASE = "https://raw.githubusercontent.com/KhawerAbbas7/MyGifs/refs/heads/main/public/gifs/";
-const API_BASE = "https://wsrv.nl/?url=";
-let gifData = [];
-const grid = document.getElementById('grid');
-const searchInput = document.getElementById('search');
-const galleryView = document.getElementById('gallery-view');
-const detailView = document.getElementById('detail-view');
-const detailImage = document.getElementById('detail-image');
-const detailTitle = document.getElementById('detail-title');
-const copyBtn = document.getElementById('copy-btn');
-init();
-function init() {
-  const params = new URLSearchParams(window.location.search);
-  const viewGif = params.get('view');
-  fetch('gifs.json')
-    .then(r => r.json())
-    .then(d => {
-      gifData = d;
-      if (viewGif) {
-        renderDetail(viewGif);
-      } else {
-        renderGrid(gifData);
-      }
-    });
+const RAW="https://raw.githubusercontent.com/KhawerAbbas7/MyGifs/refs/heads/main/public/gifs/"
+const API="https://wsrv.nl/?url="
+const grid=document.getElementById("grid")
+const gallery=document.getElementById("gallery")
+const detail=document.getElementById("detail")
+const search=document.getElementById("search")
+const empty=document.getElementById("empty")
+const img=document.getElementById("image")
+const title=document.getElementById("title")
+const copy=document.getElementById("copy")
+const back=document.getElementById("back")
+let gifs=[]
+init()
+
+function init(){
+  fetch("gifs.json").then(r=>r.json()).then(d=>{
+    gifs=d
+    route()
+  }).catch(()=>empty.textContent="Failed to load GIFs")
+  window.addEventListener("popstate",route)
 }
-function renderGrid(list) {
-  galleryView.classList.remove('hidden');
-  detailView.classList.add('hidden');
-  grid.innerHTML = '';
-  list.forEach(filename => {
-    const rawUrl = RAW_BASE + encodeURIComponent(filename);
-    const thumbUrl = `${API_BASE}${encodeURIComponent(rawUrl)}&w=400&h=300&fit=cover&output=jpg`;
-    const card = document.createElement('div');
-    card.className = 'card';
-    card.onclick = () => window.location.search = `?view=${encodeURIComponent(filename)}`;
-    card.innerHTML = `
-      <div class="card-img-wrapper">
-        <img src="${thumbUrl}" loading="lazy" alt="${filename}">
-      </div>
-      <div class="card-content">
-        <div class="card-title">${filename}</div>
-      </div>
-    `;
-    grid.appendChild(card);
-  });
+
+function route(){
+  const p=new URLSearchParams(location.search)
+  const v=p.get("view")
+  v?showDetail(v):showGrid(gifs)
 }
-function renderDetail(filename) {
-  const decoded = decodeURIComponent(filename);
-  if (!gifData.includes(decoded)) {
-    window.location.search = '';
-    return;
-  }
-  galleryView.classList.add('hidden');
-  detailView.classList.remove('hidden');
-  const fullUrl = RAW_BASE + encodeURIComponent(decoded);
-  detailTitle.textContent = decoded;
-  detailImage.src = fullUrl;
-  copyBtn.onclick = () => {
-    navigator.clipboard.writeText(fullUrl).then(() => {
-      const originalText = copyBtn.textContent;
-      copyBtn.textContent = 'Copied!';
-      setTimeout(() => copyBtn.textContent = originalText, 2000);
-    });
-  };
+
+function showGrid(list){
+  detail.classList.add("hidden")
+  gallery.classList.remove("hidden")
+  grid.innerHTML=""
+  empty.classList.toggle("hidden",list.length>0)
+  list.forEach(f=>{
+    const raw=RAW+encodeURIComponent(f)
+    const thumb=API+encodeURIComponent(raw)+"&w=400&h=300&fit=cover&output=jpg"
+    const c=document.createElement("div")
+    c.className="card"
+    c.tabIndex=0
+    c.onclick=()=>navigate(f)
+    c.onkeydown=e=>e.key==="Enter"&&navigate(f)
+    c.innerHTML=`<div class="thumb"><img src="${thumb}" loading="lazy" alt="${f}"></div><div class="card-title">${f}</div>`
+    grid.appendChild(c)
+  })
 }
-searchInput.addEventListener('input', (e) => {
-  const term = e.target.value.toLowerCase();
-  renderGrid(gifData.filter(g => g.toLowerCase().includes(term)));
-});
+
+function showDetail(f){
+  if(!gifs.includes(f)){history.replaceState(null,"","./");return}
+  gallery.classList.add("hidden")
+  detail.classList.remove("hidden")
+  const url=RAW+encodeURIComponent(f)
+  title.textContent=f
+  img.src=url
+  img.alt=f
+  copy.onclick=()=>navigator.clipboard.writeText(url).then(()=>{
+    copy.textContent="Copied"
+    setTimeout(()=>copy.textContent="Copy Link",1500)
+  })
+}
+
+function navigate(f){
+  history.pushState(null,"","?view="+encodeURIComponent(f))
+  showDetail(f)
+}
+
+let t
+search.oninput=e=>{
+  clearTimeout(t)
+  t=setTimeout(()=>{
+    const q=e.target.value.toLowerCase()
+    showGrid(gifs.filter(g=>g.toLowerCase().includes(q)))
+  },120)
+}
+
+back.onclick=()=>{history.pushState(null,"","./");showGrid(gifs)}
 </script>
 </body>
 </html>
