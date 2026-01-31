@@ -23,8 +23,8 @@ function display(list){
   list.forEach(g=>{
     const div=document.createElement("div");
     div.className="gif";
-    div.innerHTML=`<img src="gifs/${g}" title="${g}"><br>${g}`;
-    div.onclick=()=>navigator.clipboard.writeText(window.location.href+"gifs/"+g).then(()=>alert("Link copied!"));
+    div.innerHTML=`<img src="gifs/${encodeURIComponent(g)}" title="${g}"><br>${g}`;
+    div.onclick=()=>navigator.clipboard.writeText(window.location.href+"gifs/"+encodeURIComponent(g)).then(()=>alert("Link copied!"));
     gallery.appendChild(div);
   });
 }
