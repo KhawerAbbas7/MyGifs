@@ -184,7 +184,8 @@ function showDetail(f){
   detail.classList.remove("hidden")
   const url=RAW+encodeURIComponent(f)
   title.textContent=f
-  img.src=url
+  img.src=""
+  img.src=url+"?t="+Date.now()
   img.alt=f
   copy.onclick=()=>navigator.clipboard.writeText(url).then(()=>{
     copy.textContent="Copied"
