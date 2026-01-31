@@ -15,22 +15,24 @@ input {padding:8px;width:100%;margin-bottom:20px}
 <input type="text" id="search" placeholder="Search GIFs...">
 <div id="gallery"></div>
 <script>
+const RAW_BASE="https://raw.githubusercontent.com/KhawerAbbas7/MyGifs/refs/heads/main/public/gifs/";
 let gifs=[];
-fetch('gifs.json').then(res=>res.json()).then(data=>{gifs=data;display(gifs);});
+fetch("gifs.json").then(r=>r.json()).then(d=>{gifs=d;display(gifs);});
 const gallery=document.getElementById("gallery");
 function display(list){
   gallery.innerHTML="";
   list.forEach(g=>{
+    const enc=encodeURIComponent(g);
+    const url=RAW_BASE+enc;
     const div=document.createElement("div");
     div.className="gif";
-    div.innerHTML=`<img src="gifs/${encodeURIComponent(g)}" title="${g}"><br>${g}`;
-    div.onclick=()=>navigator.clipboard.writeText(window.location.href+"gifs/"+encodeURIComponent(g)).then(()=>alert("Link copied!"));
+    div.innerHTML=`<img src="${url}" title="${g}"><br>${g}`;
+    div.onclick=()=>navigator.clipboard.writeText(url).then(()=>alert("Link copied!"));
     gallery.appendChild(div);
   });
 }
 document.getElementById("search").addEventListener("input",e=>{
-  const filtered=gifs.filter(g=>g.toLowerCase().includes(e.target.value.toLowerCase()));
-  display(filtered);
+  display(gifs.filter(g=>g.toLowerCase().includes(e.target.value.toLowerCase())));
 });
 </script>
 </body>
