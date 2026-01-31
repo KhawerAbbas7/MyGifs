@@ -24,6 +24,7 @@ jobs:
         git config user.email "github-actions@github.com"
         git add gifs.json
         git diff-index --quiet HEAD || git commit -m "Update gifs.json"
-        git push https://$PAT_TOKEN@github.com/KhawerAbbas7/MyGifs.git HEAD:main
+        git push https://$PAT_TOKEN@github.com/KhawerAbbas7/MyGifs HEAD:main
       env:
         PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
+
