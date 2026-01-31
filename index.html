@@ -180,6 +180,7 @@ function showGrid(list){
 
 function showDetail(f){
   if(!gifs.includes(f)){history.replaceState(null,"","./");return}
+  gallery.classList.remove("hidden")
   gallery.classList.add("hidden")
   detail.classList.remove("hidden")
   const url=RAW+encodeURIComponent(f)
