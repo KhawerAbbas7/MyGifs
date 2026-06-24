@@ -1,21 +1,18 @@
 name: Update GIFs JSON
-
 on:
   push:
     branches:
       - main
     paths:
-      - 'gifs/**'
+      - 'public/gifs/**'
   workflow_dispatch:
-
 jobs:
   generate:
     runs-on: ubuntu-latest
     permissions:
-      contents: write # Needed for the default GITHUB_TOKEN to push
+      contents: write
     steps:
       - uses: actions/checkout@v3
-
       - name: Generate gifs.json
         shell: python
         run: |
@@ -24,7 +21,6 @@ jobs:
           files.sort()
           with open('gifs.json', 'w') as f:
             json.dump(files, f)
-
       - name: Commit gifs.json
         run: |
           git config user.name "github-actions[bot]"
@@ -37,4 +33,3 @@ jobs:
             git pull --rebase origin main
             git push
           fi
-
