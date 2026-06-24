@@ -151,13 +151,18 @@ let gifs=[]
 init()
 
 function init(){
-  fetch("gifs.json").then(r=>r.json()).then(d=>{
+  fetch("gifs.json?t="+Date.now(),{
+    cache:"no-store"
+  })
+  .then(r=>r.json())
+  .then(d=>{
     gifs=d
     route()
-  }).catch(()=>empty.textContent="Failed to load GIFs")
+  })
+  .catch(()=>empty.textContent="Failed to load GIFs")
+
   window.addEventListener("popstate",route)
 }
-
 function route(){
   const p=new URLSearchParams(location.search)
   const v=p.get("view")
